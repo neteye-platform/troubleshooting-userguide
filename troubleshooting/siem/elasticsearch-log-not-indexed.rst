@@ -1,0 +1,25 @@
+.. _elasticsearch-log-not-indexed:
+
+Some logs are not indexed in Elasticsearch
+------------------------------------------
+
+
+It might happen that some log files collected by Rsyslog are not indexed correctly
+or not indexed at all in Elasticsearch.  These logs can be manually reindexed in
+Elasticsearch via the script ``elasticsearch-reindex-logs`` that can be found under
+``/usr/share/neteye/backup/elasticsearch/``
+
+The script can be run by typing::
+
+  sh elasticsearch-reindex-logs -f /full/path/to/logfile.log.gz
+
+The input must be a log file that has been previously gzipped by the
+Logscleaner service. The log files are located in the directory ``/neteye/shared/rsyslog/data/``.
+The full set of options is displayed by running
+the script as follows::
+
+  sh elasticsearch-reindex-logs --help
+
+Pay attention to avoid to use the script to reindex a log that is
+already indexed in Elasticsearch. This causes the duplication of the
+same data in Elasticsearch.
